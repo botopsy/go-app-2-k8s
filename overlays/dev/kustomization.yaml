@@ -1,0 +1,18 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+  - ../../base
+
+nameSuffix: -dev
+
+patches:
+  - target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: go-app-2-ingress
+    path: ingress.yaml
+
+images:
+  - name: ghcr.io/botopsy/go-app-2
+    newTag: latest
